@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soma Swasthya — Ayurvedic Consultations with Avanthi Singh</title>
+<meta name="description" content="Personalized Ayurvedic consultations, herbal remedies, and wellness packages with practitioner Avanthi Singh.">
+
+<!--
+  ============================================================
+  SOMA SWASTHYA — OWNER'S GUIDE (read this first, then delete)
+  ============================================================
+  This file is a complete, self-contained website: one HTML file,
+  no build tools, no server required. Everything you need to edit
+  lives in three places:
+
+  1. YOUR LOGO
+     Search for "LOGO GOES HERE" below. Replace the placeholder
+     mark with: <img src="logo.png" alt="Soma Swasthya logo">
+     Just put your logo file in the same folder as this page and
+     name it logo.png (or update the filename to match).
+
+  2. SERVICES, PRODUCTS & PACKAGES
+     These live in a separate file: data.json (in the same folder
+     as this page). Open it, copy an existing entry, change the
+     words, save — a new card appears on the site automatically.
+     No design work needed, and you never need to touch this HTML
+     file for a content change. See EDITING-GUIDE.md for how to do
+     this straight from GitHub's website, no software required.
+
+  3. BOOKING & PAYMENTS (both currently placeholders)
+     - Booking: search for "CALENDLY EMBED GOES HERE". Sign up free
+       at calendly.com, create an event type, and paste your embed
+       code / link where marked.
+     - Payments: search for "stripeLink:" inside each product/service
+       entry. Create a free Stripe (stripe.com) account, make a
+       "Payment Link" for each product, and paste the URL in.
+       Stripe accepts nearly every major world currency and only
+       charges a small fee per sale — no monthly cost.
+
+  See the separate SETUP-GUIDE.md file for a full walkthrough,
+  including free hosting instructions (GitHub Pages / Cloudflare
+  Pages).
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* ---- Color tokens ---- */
+    --bg: #F1E8D6;              /* warm sand */
+    --bg-card: #FBF6EA;         /* lifted parchment */
+    --ink: #2B2A45;             /* dusk indigo — primary text */
+    --ink-soft: #5B5A78;        /* secondary text */
+    --gold: #C1892E;            /* turmeric — pitta */
+    --sage: #667A54;            /* tulsi — kapha */
+    --slate: #7C89A3;           /* dawn sky — vata */
+    --line: rgba(43, 42, 69, 0.14);
+    --deep: #211F38;            /* night indigo — dark sections */
+    --deep-ink: #E8E2D2;        /* text on dark */
+
+    /* ---- Type ---- */
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+    --font-body: 'Karla', ui-sans-serif, system-ui, sans-serif;
+
+    --radius: 6px;
+    --max-w: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { position: relative; }
+
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: var(--radius);
+    border: 1.5px solid transparent;
+    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+  a.btn:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2.5px solid var(--gold);
+    outline-offset: 3px;
+  }
+  a.btn-primary {
+    background: var(--ink);
+    color: var(--bg-card);
+  }
+  a.btn-primary:hover { transform: translateY(-2px); background: var(--deep); }
+  a.btn-ghost {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  a.btn-ghost:hover { transform: translateY(-2px); background: var(--ink); color: var(--bg-card); }
+  a.btn-gold {
+    background: var(--gold);
+    color: var(--bg-card);
+  }
+  a.btn-gold:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(241, 232, 214, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand-mark {
+    height: 42px;
+    width: auto;
+    border-radius: 7px;
+    flex-shrink: 0;
+  }
+  .brand-word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.18rem;
+    letter-spacing: -0.01em;
+  }
+  .brand-word span { color: var(--gold); font-style: italic; }
+
+  nav.links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  nav.links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  nav.links a:hover { color: var(--gold); }
+  nav.links a.btn { color: var(--bg-card); padding: 10px 20px; }
+  nav.links a.btn:hover { color: var(--bg-card); }
+
+  .nav-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 96px 32px 80px;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 4.6vw, 3.7rem);
+    margin-bottom: 22px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero p.lede {
+    font-size: 1.12rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 34px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .hero-trust {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+  }
+  .hero-trust span { display: flex; align-items: center; gap: 8px; }
+  .hero-trust svg { width: 16px; height: 16px; color: var(--sage); flex-shrink: 0; }
+
+  /* Tridosha mark: three breathing circles = the site's signature element */
+  .tridosha {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .tridosha svg { width: 100%; height: 100%; }
+  .tridosha-ring {
+    animation: breathe 9s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .tridosha-ring.r2 { animation-delay: -3s; }
+  .tridosha-ring.r3 { animation-delay: -6s; }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.045); opacity: 1; }
+  }
+  .tridosha-label {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    fill: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* ---------- Section shells ---------- */
+  .section { padding: 88px 32px; }
+  .section-head {
+    max-width: 640px;
+    margin-bottom: 52px;
+  }
+  .section-head h2 {
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    margin-top: 12px;
+  }
+  .section-head p {
+    color: var(--ink-soft);
+    margin-top: 16px;
+    font-size: 1.03rem;
+  }
+  .section.alt { background: var(--bg-card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section.dark { background: var(--deep); color: var(--deep-ink); }
+  .section.dark .section-head p { color: rgba(232,226,210,0.72); }
+  .section.dark .eyebrow { color: var(--gold); }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 56px;
+    align-items: start;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .about-portrait {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(193,137,46,0.18), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(102,122,84,0.22), transparent 55%),
+      var(--bg-card);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-portrait span {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .about-body p { margin: 0 0 18px; color: var(--ink-soft); font-size: 1.02rem; }
+  .about-body p:first-of-type { color: var(--ink); font-size: 1.14rem; font-family: var(--font-display); line-height: 1.5; }
+  .credentials {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 26px;
+  }
+  .credentials div strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--gold);
+  }
+  .credentials div p { margin: 4px 0 0; font-size: 0.84rem; color: var(--ink-soft); }
+
+  /* ---------- Services (data-driven) ---------- */
+  .service-grid {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(43,42,69,0.08);
+  }
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .service-card h3 { font-size: 1.22rem; margin-bottom: 4px; }
+  .service-duration {
+    font-size: 0.78rem;
+    color: var(--sage);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .service-card p.desc {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    flex-grow: 1;
+    margin: 0 0 20px;
+  }
+  .service-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .service-price span { font-size: 0.8rem; color: var(--ink-soft); font-family: var(--font-body); }
+  .service-card .btn { align-self: flex-start; }
+
+  /* ---------- Booking ---------- */
+  .booking-grid {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .booking-steps { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+  .booking-steps li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .booking-steps .num {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    width: 30px;
+  }
+  .booking-steps p { margin: 0; color: rgba(232,226,210,0.78); font-size: 0.95rem; }
+  .booking-steps strong { display: block; color: var(--deep-ink); font-size: 1.02rem; margin-bottom: 3px; }
+
+  .booking-embed {
+    background: rgba(232,226,210,0.05);
+    border: 1.5px dashed rgba(232,226,210,0.35);
+    border-radius: var(--radius);
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+    text-align: center;
+  }
+  .booking-embed .placeholder-inner p {
+    color: rgba(232,226,210,0.65);
+    font-size: 0.9rem;
+    max-width: 34ch;
+    margin: 14px auto 22px;
+  }
+  .booking-embed svg { width: 44px; height: 44px; color: var(--gold); margin: 0 auto; }
+
+  /* ---------- Shop (data-driven) ---------- */
+  .shop-grid {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(43,42,69,0.08); }
+  .product-thumb {
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, rgba(193,137,46,0.16), rgba(102,122,84,0.16));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product-thumb svg { width: 46px; height: 46px; color: var(--ink); opacity: 0.55; }
+  .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+  .product-info h3 { font-size: 1.02rem; margin-bottom: 6px; }
+  .product-info p.desc { font-size: 0.85rem; color: var(--ink-soft); flex-grow: 1; margin: 0 0 14px; }
+  .product-price { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 14px; }
+  .product-info .btn { width: 100%; justify-content: center; padding: 11px 18px; font-size: 0.85rem; }
+
+  .shop-note {
+    max-width: var(--max-w);
+    margin: 30px auto 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+
+  /* ---------- Contact / Footer ---------- */
+  footer {
+    background: var(--deep);
+    color: rgba(232,226,210,0.8);
+    padding: 70px 32px 32px;
+  }
+  .footer-grid {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.8fr;
+    gap: 40px;
+    padding-bottom: 46px;
+    border-bottom: 1px solid rgba(232,226,210,0.14);
+  }
+  footer h3 {
+    color: var(--deep-ink);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  footer p { font-size: 0.92rem; line-height: 1.6; margin: 0; }
+  footer h4 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 16px;
+  }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer ul a { text-decoration: none; font-size: 0.92rem; color: rgba(232,226,210,0.78); transition: color 0.15s ease; }
+  footer ul a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: var(--max-w);
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: rgba(232,226,210,0.5);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .tridosha { order: -1; max-width: 280px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-portrait { max-width: 320px; aspect-ratio: 1/1; }
+    .service-grid { grid-template-columns: repeat(2, 1fr); }
+    .booking-grid { grid-template-columns: 1fr; }
+    .shop-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 680px) {
+    .wrap, .nav { padding-left: 20px; padding-right: 20px; }
+    .section { padding: 64px 20px; }
+    nav.links { position: fixed; inset: 68px 0 0 0; background: var(--bg); flex-direction: column; padding: 34px 28px; gap: 22px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; border-top: 1px solid var(--line); }
+    nav.links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    nav.links a.btn { align-self: flex-start; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: 1.5px solid var(--ink); border-radius: var(--radius); cursor: pointer; }
+    .nav-toggle svg { width: 18px; height: 18px; }
+    .service-grid, .shop-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top">
+      <img src="logo.png" alt="Soma Swasthya Sanctuary logo" class="brand-mark">
+      <span class="brand-word">Soma <span>Swasthya</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#shop">Shop</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-primary" href="#booking">Book a Consultation</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Ayurvedic Consultation &amp; Herbal Care</p>
+        <h1>Find your way back to <em>balance</em>.</h1>
+        <p class="lede">Soma Swasthya offers personalized Ayurvedic consultations, herbal formulations, and wellness programs with practitioner Avanthi Singh — rooted in tradition, shaped around your constitution.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#booking">Book a Consultation</a>
+          <a class="btn btn-ghost" href="#shop">Explore Remedies</a>
+        </div>
+        <div class="hero-trust">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Personalized dosha assessments</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Traditional herbal formulations</span>
+        </div>
+      </div>
+      <div class="tridosha" role="img" aria-label="A mark of three overlapping circles representing the Ayurvedic doshas: Vata, Pitta, and Kapha">
+        <svg viewBox="0 0 400 400">
+          <g class="tridosha-ring r1">
+            <circle cx="200" cy="150" r="98" fill="none" stroke="#7C89A3" stroke-width="1.6" opacity="0.75"/>
+            <text x="200" y="58" text-anchor="middle" class="tridosha-label">Vata</text>
+          </g>
+          <g class="tridosha-ring r2">
+            <circle cx="150" cy="245" r="98" fill="none" stroke="#C1892E" stroke-width="1.6" opacity="0.75"/>
+            <text x="76" y="330" text-anchor="middle" class="tridosha-label">Pitta</text>
+          </g>
+          <g class="tridosha-ring r3">
+            <circle cx="250" cy="245" r="98" fill="none" stroke="#667A54" stroke-width="1.6" opacity="0.75"/>
+            <text x="326" y="330" text-anchor="middle" class="tridosha-label">Kapha</text>
+          </g>
+          <circle cx="200" cy="216" r="6" fill="#2B2A45"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section alt" id="about">
+    <div class="about-grid">
+      <div class="about-portrait">
+        <!-- Swap this block for: <img src="avanthi.jpg" alt="Avanthi Singh"> -->
+        <span>Portrait of<br>Avanthi Singh</span>
+      </div>
+      <div class="about-body">
+        <p class="eyebrow" style="margin-bottom:14px;">About the Practitioner</p>
+        <p>Avanthi Singh has spent her career helping people listen to what their bodies already know.</p>
+        <p>Trained in classical Ayurvedic principles, Avanthi works with each client to understand their unique constitution — their prakriti — and build a practical, sustainable path toward balance. Her approach blends traditional diagnostics with modern lifestyle realities: no extremes, no one-size-fits-all protocols, just care that fits the life you actually live.</p>
+        <p>Every consultation at Soma Swasthya begins with listening. From there, Avanthi builds a plan that may include dietary guidance, herbal support, daily rhythm (dinacharya), and seasonal adjustments — revisited and refined as you change.</p>
+        <div class="credentials">
+          <div><strong>10+</strong><p>Years in practice</p></div>
+          <div><strong>1:1</strong><p>Personalized protocols</p></div>
+          <div><strong>3</strong><p>Doshas, one you</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="section" id="services">
+    <div class="section-head">
+      <p class="eyebrow">Services</p>
+      <h2>Ways to work together</h2>
+      <p>From a first consultation to an ongoing seasonal program, each offering is built around your constitution. New to Soma Swasthya? Start with the Initial Consultation.</p>
+    </div>
+    <div class="service-grid" id="serviceGrid"><!-- populated by JS from SERVICES below --></div>
+  </section>
+
+  <!-- ================= BOOKING ================= -->
+  <section class="section dark" id="booking">
+    <div class="booking-grid">
+      <div>
+        <p class="eyebrow">Booking</p>
+        <h2 style="color: var(--deep-ink); margin-top: 12px;">Book your session</h2>
+        <p style="color: rgba(232,226,210,0.72); margin-top: 16px;">Choose a time that works for you. You'll receive a confirmation by email, with a reminder before your appointment.</p>
+        <ul class="booking-steps">
+          <li><span class="num">1.</span><p><strong>Pick a service</strong>Choose consultation type from the calendar.</p></li>
+          <li><span class="num">2.</span><p><strong>Choose a time</strong>See real-time availability and select what suits you.</p></li>
+          <li><span class="num">3.</span><p><strong>Confirm &amp; pay</strong>Secure your slot; reschedule anytime from your confirmation email.</p></li>
+        </ul>
+      </div>
+      <div class="booking-embed">
+        <!--
+          CALENDLY EMBED GOES HERE.
+          Free plan at calendly.com — after creating an event type,
+          replace this whole <div class="placeholder-inner"> block with
+          Calendly's provided embed <div> + <script> snippet, e.g.:
+
+          <div class="calendly-inline-widget" data-url="https://calendly.com/your-name/consultation" style="min-width:320px;height:600px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+        -->
+        <div class="placeholder-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+          <p><strong style="color: var(--deep-ink); display:block; margin-bottom:6px;">Calendar coming soon</strong>This is where your live booking calendar will appear once connected to Calendly (free) or Setmore (free).</p>
+          <a class="btn btn-gold" href="#contact">Contact to Book Manually</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SHOP ================= -->
+  <section class="section" id="shop">
+    <div class="section-head">
+      <p class="eyebrow">Shop</p>
+      <h2>Herbal remedies &amp; wellness packages</h2>
+      <p>Formulations selected to support your constitution — from daily herbal support to multi-week seasonal programs.</p>
+    </div>
+    <div class="shop-grid" id="shopGrid"><!-- populated by JS from PRODUCTS below --></div>
+    <p class="shop-note">Checkout is securely handled by Stripe (free to set up, accepts all major world currencies). Buttons above are placeholders until a Stripe Payment Link is added for each product in data.json — see EDITING-GUIDE.md.</p>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section alt" id="contact">
+    <div class="section-head" style="margin-bottom: 30px;">
+      <p class="eyebrow">Contact</p>
+      <h2>Questions before you book?</h2>
+      <p>Reach out directly — Avanthi typically replies within one business day.</p>
+    </div>
+    <div style="max-width: var(--max-w); margin: 0 auto; display:flex; gap:40px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="mailto:hello@somaswasthya.com">Email hello@somaswasthya.com</a>
+      <a class="btn btn-ghost" href="tel:+10000000000">Call +1 (000) 000-0000</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>Soma Swasthya</h3>
+      <p>Ayurvedic consultations, herbal remedies, and wellness programs with practitioner Avanthi Singh. Rooted in tradition, personalized for you.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#booking">Booking</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@somaswasthya.com">hello@somaswasthya.com</a></li>
+        <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+        <li><a href="#contact">Send a message</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> Soma Swasthya. All rights reserved.</span>
+    <span>Site by you, powered by free tools.</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ============================================================
+     SERVICES & PRODUCTS now live in data.json (same folder as this
+     file), not here. That means everyday content edits — new
+     services, new products, price changes — never require opening
+     this HTML file. See EDITING-GUIDE.md.
+
+     FALLBACK_DATA below is only used if data.json can't be loaded
+     (for example, double-clicking this file locally instead of
+     viewing it through a real web server/hosting — browsers block
+     that kind of file loading for security reasons). Once the site
+     is live on GitHub Pages or Cloudflare Pages, data.json always
+     loads normally and this fallback is never used. You can safely
+     ignore it.
+     ============================================================ */
+  const FALLBACK_DATA = {
+    services: [
+      { name: "Initial Consultation", duration: "75 min · in person or video", description: "A full assessment of your constitution (prakriti), current imbalances, diet, and daily rhythm, ending with a personalized protocol.", price: "$150", icon: "compass", link: "#booking" },
+      { name: "Follow-Up Consultation", duration: "40 min · in person or video", description: "Progress review and protocol refinement — recommended every 4–6 weeks while building new habits.", price: "$85", icon: "leaf", link: "#booking" },
+      { name: "Herbal Formulation", duration: "Ongoing supply", description: "Custom-blended churnas, oils, or teas made to support your specific constitution and current season.", price: "From $35", icon: "root", link: "#shop" },
+      { name: "Seasonal Reset Package", duration: "3-month program", description: "A guided, multi-session program aligning diet, herbs, and daily practice with the changing season.", price: "From $420", icon: "box", link: "#booking" }
+    ],
+    products: [
+      { name: "Triphala Churna", description: "Classic three-fruit blend to support digestion and gentle detoxification.", price: "$24", stripeLink: "#contact" },
+      { name: "Ashwagandha Root Oil", description: "Warming massage oil traditionally used to calm the nervous system.", price: "$32", stripeLink: "#contact" },
+      { name: "Golden Milk Blend", description: "Turmeric, ginger, and warming spices for a nightly ritual cup.", price: "$19", stripeLink: "#contact" },
+      { name: "Tridosha Balancing Tea", description: "A gentle daily tea formulated to suit all three constitutions.", price: "$21", stripeLink: "#contact" }
+    ]
+  };
+
+  const ICONS = {
+    leaf: '<svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12c0-5 4-9 9-9 5 5 5 12 0 17-5 0-9-4-9-8Z"/><path d="M5 12c3 0 6 1.5 8 3.5"/></svg>',
+    root: '<svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v6"/><path d="M12 9c-2 2-3 5-2.5 9M12 9c2 2 3 5 2.5 9M12 9c-3 1-5 3-6 6M12 9c3 1 5 3 6 6"/><circle cx="12" cy="4.5" r="1.5" fill="currentColor" stroke="none"/></svg>',
+    compass: '<svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-3-1.5 2-5 3 1.5Z"/></svg>',
+    box: '<svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M3 8.5V16l9 4.5 9-4.5V8.5"/><path d="M12 13v7.5"/></svg>'
+  };
+
+  function renderServices(services) {
+    const serviceGrid = document.getElementById('serviceGrid');
+    serviceGrid.innerHTML = services.map(s => `
+      <div class="service-card">
+        ${ICONS[s.icon] || ICONS.leaf}
+        <h3>${s.name}</h3>
+        <p class="service-duration">${s.duration}</p>
+        <p class="desc">${s.description}</p>
+        <p class="service-price">${s.price}</p>
+        <a class="btn btn-ghost" href="${s.link}">Book This</a>
+      </div>
+    `).join('');
+  }
+
+  function renderProducts(products) {
+    const shopGrid = document.getElementById('shopGrid');
+    shopGrid.innerHTML = products.map(p => `
+      <div class="product-card">
+        <div class="product-thumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 3h8l1 4H7l1-4Z"/><path d="M6 7h12l-1 13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z"/><path d="M10 11v5M14 11v5"/></svg>
+        </div>
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p class="desc">${p.description}</p>
+          <p class="product-price">${p.price}</p>
+          <a class="btn btn-primary" href="${p.stripeLink}">Buy Now</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Load content from data.json (this is the file you edit day-to-day).
+  // Falls back to FALLBACK_DATA above only if data.json can't be reached.
+  fetch('data.json')
+    .then(res => { if (!res.ok) throw new Error('data.json not found'); return res.json(); })
+    .then(data => {
+      renderServices(data.services || []);
+      renderProducts(data.products || []);
+    })
+    .catch(() => {
+      renderServices(FALLBACK_DATA.services);
+      renderProducts(FALLBACK_DATA.products);
+    });
+</script>
+
+</body>
+</html>

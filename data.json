@@ -1,0 +1,62 @@
+{
+  "services": [
+    {
+      "name": "Initial Consultation",
+      "duration": "75 min · in person or video",
+      "description": "A full assessment of your constitution (prakriti), current imbalances, diet, and daily rhythm, ending with a personalized protocol.",
+      "price": "$150",
+      "icon": "compass",
+      "link": "#booking"
+    },
+    {
+      "name": "Follow-Up Consultation",
+      "duration": "40 min · in person or video",
+      "description": "Progress review and protocol refinement — recommended every 4–6 weeks while building new habits.",
+      "price": "$85",
+      "icon": "leaf",
+      "link": "#booking"
+    },
+    {
+      "name": "Herbal Formulation",
+      "duration": "Ongoing supply",
+      "description": "Custom-blended churnas, oils, or teas made to support your specific constitution and current season.",
+      "price": "From $35",
+      "icon": "root",
+      "link": "#shop"
+    },
+    {
+      "name": "Seasonal Reset Package",
+      "duration": "3-month program",
+      "description": "A guided, multi-session program aligning diet, herbs, and daily practice with the changing season.",
+      "price": "From $420",
+      "icon": "box",
+      "link": "#booking"
+    }
+  ],
+  "products": [
+    {
+      "name": "Triphala Churna",
+      "description": "Classic three-fruit blend to support digestion and gentle detoxification.",
+      "price": "$24",
+      "stripeLink": "#contact"
+    },
+    {
+      "name": "Ashwagandha Root Oil",
+      "description": "Warming massage oil traditionally used to calm the nervous system.",
+      "price": "$32",
+      "stripeLink": "#contact"
+    },
+    {
+      "name": "Golden Milk Blend",
+      "description": "Turmeric, ginger, and warming spices for a nightly ritual cup.",
+      "price": "$19",
+      "stripeLink": "#contact"
+    },
+    {
+      "name": "Tridosha Balancing Tea",
+      "description": "A gentle daily tea formulated to suit all three constitutions.",
+      "price": "$21",
+      "stripeLink": "#contact"
+    }
+  ]
+}
