@@ -12,7 +12,7 @@
       "description": "Restorative herbal and therapeutic support tailored to your constitution.",
       "items": ["Ayurvedic Products", "Herbal Supplements", "Consciousness Therapies", "Panchakarma"],
       "icon": "leaf",
-      "link": "#shop"
+      "link": "#soma-collection"
     },
     {
       "category": "Conscious Living & Education",
@@ -27,25 +27,25 @@
       "name": "Triphala Churna",
       "description": "Classic three-fruit blend to support digestion and gentle detoxification.",
       "price": "$24",
-      "paypalLink": "#contact"
+      "paypalLink": "#connect"
     },
     {
       "name": "Ashwagandha Root Oil",
       "description": "Warming massage oil traditionally used to calm the nervous system.",
       "price": "$32",
-      "paypalLink": "#contact"
+      "paypalLink": "#connect"
     },
     {
       "name": "Golden Milk Blend",
       "description": "Turmeric, ginger, and warming spices for a nightly ritual cup.",
       "price": "$19",
-      "paypalLink": "#contact"
+      "paypalLink": "#connect"
     },
     {
       "name": "Tridosha Balancing Tea",
       "description": "A gentle daily tea formulated to suit all three constitutions.",
       "price": "$21",
-      "paypalLink": "#contact"
+      "paypalLink": "#connect"
     }
   ]
 }

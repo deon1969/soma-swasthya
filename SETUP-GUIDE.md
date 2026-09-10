@@ -14,7 +14,7 @@ Your website is one file: `index.html`. You don't need to install anything to pr
 
 ## 2. Add your photo
 
-Find `about-portrait` further down and replace the placeholder text block with:
+Find `heart-of-soma-portrait` further down and replace the placeholder text block with:
 ```
 <img src="avanthi.jpg" alt="Avanthi Singh">
 ```

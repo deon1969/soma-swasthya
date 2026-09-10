@@ -278,7 +278,7 @@
   .section.sage { background: var(--bg-sage); }
 
   /* ---------- The Heart of Soma ---------- */
-  .the heart of soma-body-grid {
+  .heart-of-soma-grid {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
     gap: 72px;
@@ -286,7 +286,7 @@
     max-width: var(--max-w);
     margin: 0 auto;
   }
-  .the heart of soma-portrait {
+  .heart-of-soma-portrait {
     aspect-ratio: 4 / 5;
     border-radius: var(--radius-lg);
     background:
@@ -298,7 +298,7 @@
     align-items: center;
     justify-content: center;
   }
-  .the heart of soma-portrait span {
+  .heart-of-soma-portrait span {
     font-family: var(--font-display);
     font-style: italic;
     color: var(--ink-soft);
@@ -306,8 +306,8 @@
     text-align: center;
     padding: 0 24px;
   }
-  .the heart of soma p { margin: 0 0 20px; color: var(--ink-soft); font-size: 1.03rem; line-height: 1.75; }
-  .the heart of soma p:first-of-type { color: var(--ink); font-size: 1.2rem; font-family: var(--font-display); line-height: 1.6; }
+  .heart-of-soma-copy p { margin: 0 0 20px; color: var(--ink-soft); font-size: 1.03rem; line-height: 1.75; }
+  .heart-of-soma-copy p:first-of-type { color: var(--ink); font-size: 1.2rem; font-family: var(--font-display); line-height: 1.6; }
   .credentials {
     display: flex;
     gap: 36px;
@@ -325,7 +325,7 @@
   }
   .credentials div p { margin: 6px 0 0; font-size: 0.85rem; color: var(--ink-soft); }
 
-  /* ---------- Services (data-driven) ---------- */
+  /* ---------- Healing Pathways (data-driven) ---------- */
   .service-grid {
     max-width: var(--max-w);
     margin: 0 auto;
@@ -432,7 +432,7 @@
   }
   .booking-embed svg { width: 40px; height: 40px; color: var(--gold-deep); margin: 0 auto; }
 
-  /* ---------- Shop (data-driven) ---------- */
+  /* ---------- Soma Collection (data-driven) ---------- */
   .shop-grid {
     max-width: var(--max-w);
     margin: 0 auto;
@@ -473,7 +473,7 @@
     padding-top: 24px;
   }
 
-  /* ---------- Contact / Footer ---------- */
+  /* ---------- Connect / Footer ---------- */
   footer {
     background: var(--bg-alt);
     color: var(--ink-soft);
@@ -520,9 +520,16 @@
   }
 
   /* ---------- Responsive ---------- */
+  @media (max-width: 1120px) {
+    nav.links { position: fixed; inset: 116px 0 0 0; background: var(--bg); flex-direction: column; padding: 34px 28px; gap: 22px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; border-top: 1px solid var(--line); }
+    nav.links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    nav.links a.btn { align-self: flex-start; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: 1.5px solid var(--ink); border-radius: var(--radius); cursor: pointer; }
+    .nav-toggle svg { width: 18px; height: 18px; }
+  }
   @media (max-width: 980px) {
-    .the heart of soma-grid { grid-template-columns: 1fr; }
-    .the heart of soma-portrait { max-width: 320px; aspect-ratio: 1/1; }
+    .heart-of-soma-grid { grid-template-columns: 1fr; }
+    .heart-of-soma-portrait { max-width: 320px; aspect-ratio: 1/1; }
     .service-grid { grid-template-columns: repeat(2, 1fr); }
     .booking-grid { grid-template-columns: 1fr; }
     .shop-grid { grid-template-columns: repeat(2, 1fr); }
@@ -532,11 +539,7 @@
     .wrap, .nav { padding-left: 20px; padding-right: 20px; }
     .section { padding: 64px 20px; }
     .brand-mark { height: 60px; }
-    nav.links { position: fixed; inset: 88px 0 0 0; background: var(--bg); flex-direction: column; padding: 34px 28px; gap: 22px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; border-top: 1px solid var(--line); }
-    nav.links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    nav.links a.btn { align-self: flex-start; }
-    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: 1.5px solid var(--ink); border-radius: var(--radius); cursor: pointer; }
-    .nav-toggle svg { width: 18px; height: 18px; }
+    nav.links { inset: 92px 0 0 0; }
     .service-grid, .shop-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   }
@@ -553,11 +556,12 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
     <nav class="links" id="navLinks">
-      <a href="#the heart of soma">The Heart of Soma</a>
-      <a href="#services">Services</a>
-      <a href="#shop">Shop</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn-primary" href="#booking">Book a Consultation</a>
+      <a href="#heart-of-soma">The Heart of Soma</a>
+      <a href="#healing-pathways">Healing Pathways</a>
+      <a href="#reflections">Reflections</a>
+      <a href="#soma-collection">Soma Collection</a>
+      <a href="#connect">Connect</a>
+      <a class="btn btn-primary" href="#booking">Start your journey</a>
     </nav>
   </div>
 </header>
@@ -571,8 +575,7 @@
       <h1>Awaken your <em>innate healing</em>.</h1>
       <p class="lede" style="margin-left:auto; margin-right:auto;">Soma Swasthya offers Ayurvedic consultation, herbal therapies, and conscious living guidance with Avanthi Singh, M.Sc. Ayurveda &amp; Integrative Medicine — restoring your natural mind-body rhythm.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#booking">Book a Consultation</a>
-        <a class="btn btn-ghost" href="#shop">Explore Remedies</a>
+        <a class="btn btn-ghost" href="#soma-collection">Explore Remedies</a>
       </div>
       <div class="hero-trust">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Pulse diagnosis &amp; personalized readings</span>
@@ -582,13 +585,13 @@
   </section>
 
   <!-- ================= THE HEART OF SOMA ================= -->
-  <section class="section alt" id="the heart of soma">
-    <div class="the heart of soma">
-      <div class="the heart of soma">
+  <section class="section alt" id="heart-of-soma">
+    <div class="heart-of-soma-grid">
+      <div class="heart-of-soma-portrait">
         <!-- Swap this block for: <img src="avanthi.jpg" alt="Avanthi Singh"> -->
         <span>Portrait of<br>Avanthi Singh</span>
       </div>
-      <div class="the heart of soma">
+      <div class="heart-of-soma-copy">
         <p class="eyebrow" style="margin-bottom:14px;">The Heart of Soma</p>
         <p>Avanthi Singh has spent her career helping people return to their body's own intelligence.</p>
         <p>Holding an M.Sc. in Ayurveda &amp; Integrative Medicine, Avanthi works with each client through pulse diagnosis (Nadi Vigyan), intuitive readings, and classical Ayurvedic assessment to understand their unique mind-body-spirit constitution. Her approach blends traditional diagnostics with modern lifestyle realities: no extremes, no one-size-fits-all protocols, just care that fits the life you actually live.</p>
@@ -602,10 +605,10 @@
     </div>
   </section>
 
-  <!-- ================= SERVICES ================= -->
-  <section class="section" id="services">
+  <!-- ================= HEALING PATHWAYS ================= -->
+  <section class="section" id="healing-pathways">
     <div class="section-head">
-      <p class="eyebrow">Services</p>
+      <p class="eyebrow">Healing Pathways</p>
       <h2>Ways to work together</h2>
       <p>From diagnosis to daily practice, every offering supports the same rhythm: discover, rebalance, restore, and awaken. New to Soma Swasthya? Start with an Ayurvedic Consultation.</p>
     </div>
@@ -638,27 +641,36 @@
         <div class="placeholder-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
           <p><strong style="color: var(--ink); display:block; margin-bottom:6px;">Calendar coming soon</strong>This is where your live booking calendar will appear once connected to Calendly (free) or Setmore (free).</p>
-          <a class="btn btn-gold" href="#contact">Contact to Book Manually</a>
+          <a class="btn btn-gold" href="#connect">Connect to Book Manually</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SHOP ================= -->
-  <section class="section" id="shop">
+  <!-- ================= REFLECTIONS ================= -->
+  <section class="section alt" id="reflections">
+    <div class="section-head" style="margin-bottom: 0;">
+      <p class="eyebrow">Reflections</p>
+      <h2>Blog and articles</h2>
+      <p>A space for reflections on Ayurveda, conscious living, healing, and returning to your natural rhythm.</p>
+    </div>
+  </section>
+
+  <!-- ================= SOMA COLLECTION ================= -->
+  <section class="section" id="soma-collection">
     <div class="section-head">
-      <p class="eyebrow">Shop</p>
-      <h2>Herbal remedies, wellness packages &amp health products </h2>
+      <p class="eyebrow">Soma Collection</p>
+      <h2>Herbal remedies, wellness packages &amp; health products</h2>
       <p>Formulations selected to support your constitution — from daily herbal support to multi-week seasonal programs.</p>
     </div>
     <div class="shop-grid" id="shopGrid"><!-- populated by JS from PRODUCTS below --></div>
     <p class="shop-note">Checkout is securely handled by PayPal (free to set up, accepts payments in 200+ countries and 23+ currencies). Buttons above are placeholders until a PayPal Payment Link is added for each product in data.json — see EDITING-GUIDE.md.</p>
   </section>
 
-  <!-- ================= CONTACT ================= -->
-  <section class="section alt" id="contact">
+  <!-- ================= CONNECT ================= -->
+  <section class="section alt" id="connect">
     <div class="section-head" style="margin-bottom: 30px;">
-      <p class="eyebrow">Contact</p>
+      <p class="eyebrow">Connect</p>
       <h2>Questions before you book?</h2>
       <p>Reach out directly — Avanthi typically replies within one business day.</p>
     </div>
@@ -680,14 +692,14 @@
     <div>
       <h4>Explore</h4>
       <ul>
-        <li><a href="#The heart of soma">The Heart of Soma</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#booking">Booking</a></li>
+        <li><a href="#heart-of-soma">The Heart of Soma</a></li>
+        <li><a href="#healing-pathways">Healing Pathways</a></li>
+        <li><a href="#reflections">Reflections</a></li>
+        <li><a href="#soma-collection">Soma Collection</a></li>
       </ul>
     </div>
     <div>
-      <h4>Contact</h4>
+      <h4>Connect</h4>
       <ul>
         <li><a href="mailto:info@somaswasthya.com">info@somaswasthya.com</a></li>
         <li><a href="tel:+27833006068">+27 83 300 6068</a></li>
@@ -735,14 +747,14 @@
   const FALLBACK_DATA = {
     services: [
       { category: "Diagnostics & Consultation", description: "Understanding your unique mind-body-spirit constitution through traditional diagnostic methods.", items: ["Ayurvedic Consultation", "Nadi Vigyan (Pulse Diagnosis)", "Individualised Lifestyle Plans", "Intuitive Readings"], icon: "compass", link: "#booking" },
-      { category: "Therapies & Treatments", description: "Restorative herbal and therapeutic support tailored to your constitution.", items: ["Ayurvedic Products", "Herbal Supplements", "Consciousness Therapies", "Panchakarma"], icon: "leaf", link: "#shop" },
+      { category: "Therapies & Treatments", description: "Restorative herbal and therapeutic support tailored to your constitution.", items: ["Ayurvedic Products", "Herbal Supplements", "Consciousness Therapies", "Panchakarma"], icon: "leaf", link: "#soma-collection" },
       { category: "Conscious Living & Education", description: "Practices and guidance for sustainable, mindful living.", items: ["Transcendental Meditation (TM)", "Ayurvedic Student Tutoring", "Workshops"], icon: "box", link: "#booking" }
     ],
     products: [
-      { name: "Triphala Churna", description: "Classic three-fruit blend to support digestion and gentle detoxification.", price: "$24", paypalLink: "#contact" },
-      { name: "Ashwagandha Root Oil", description: "Warming massage oil traditionally used to calm the nervous system.", price: "$32", paypalLink: "#contact" },
-      { name: "Golden Milk Blend", description: "Turmeric, ginger, and warming spices for a nightly ritual cup.", price: "$19", paypalLink: "#contact" },
-      { name: "Tridosha Balancing Tea", description: "A gentle daily tea formulated to suit all three constitutions.", price: "$21", paypalLink: "#contact" }
+      { name: "Triphala Churna", description: "Classic three-fruit blend to support digestion and gentle detoxification.", price: "$24", paypalLink: "#connect" },
+      { name: "Ashwagandha Root Oil", description: "Warming massage oil traditionally used to calm the nervous system.", price: "$32", paypalLink: "#connect" },
+      { name: "Golden Milk Blend", description: "Turmeric, ginger, and warming spices for a nightly ritual cup.", price: "$19", paypalLink: "#connect" },
+      { name: "Tridosha Balancing Tea", description: "A gentle daily tea formulated to suit all three constitutions.", price: "$21", paypalLink: "#connect" }
     ]
   };
 

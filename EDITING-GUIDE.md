@@ -26,7 +26,7 @@ Find the `"products"` section. Each product looks like this:
   "name": "Tridosha Balancing Tea",
   "description": "A gentle daily tea formulated to suit all three constitutions.",
   "price": "$21",
-  "paypalLink": "#contact"
+  "paypalLink": "#connect"
 }
 ```
 
@@ -38,7 +38,7 @@ To add a new one, click right after the `}` that closes the last product, type a
   "name": "Neem Detox Capsules",
   "description": "Gentle daily support for clear skin and healthy digestion.",
   "price": "$26",
-  "paypalLink": "#contact"
+  "paypalLink": "#connect"
 }
 ```
 
