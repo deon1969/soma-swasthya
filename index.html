@@ -16,11 +16,11 @@
   lives in three places:
 
   1. YOUR LOGO
-     The logo icon is the file logo.png in this same folder — to swap
-     it, just replace that file with a new one of the same name (a
-     transparent PNG works best). The "Soma Swasthya" text next to it
-     is real text, not part of the image — search for "brand-word"
-     below if you ever need to edit that wording.
+     The full logo — icon and "Soma Swasthya" wordmark together — is
+     one image file: logo.png, in this same folder. To swap it, just
+     replace that file with a new one of the same name (a transparent
+     PNG works best, and a similar wide/horizontal shape will fit the
+     header best).
 
   2. SERVICES, PRODUCTS & PACKAGES
      These live in a separate file: data.json (in the same folder
@@ -34,11 +34,12 @@
      - Booking: search for "CALENDLY EMBED GOES HERE". Sign up free
        at calendly.com, create an event type, and paste your embed
        code / link where marked.
-     - Payments: search for "stripeLink:" inside each product/service
-       entry. Create a free Stripe (stripe.com) account, make a
-       "Payment Link" for each product, and paste the URL in.
-       Stripe accepts nearly every major world currency and only
-       charges a small fee per sale — no monthly cost.
+     - Payments: search for "paypalLink:" inside each product entry.
+       Create a free PayPal Business account (paypal.com), use
+       Pay & Get Paid > Create Payment Links and Buttons to make a
+       link for each product, and paste the URL in. PayPal Payment
+       Links work in 200+ countries and 23+ currencies, and only
+       charge a small fee per sale — no monthly cost.
 
   See the separate SETUP-GUIDE.md file for a full walkthrough,
   including free hosting instructions (GitHub Pages / Cloudflare
@@ -62,6 +63,7 @@
     --ink-soft: #837C6C;        /* warm stone grey — secondary text */
     --gold: #AD9564;            /* muted gold — used sparingly, never bright */
     --gold-deep: #93794C;       /* deeper muted gold, for text needing more contrast */
+    --gold-deeper: #7C6540;     /* darkest gold, for hover states only */
     --sage: #8B9A7E;            /* muted sage — secondary accent */
     --line: rgba(60, 56, 47, 0.12);
 
@@ -145,16 +147,16 @@
     outline-offset: 3px;
   }
   a.btn-primary {
-    background: var(--ink);
+    background: var(--gold-deep);
     color: var(--bg-card);
   }
-  a.btn-primary:hover { transform: translateY(-2px); background: var(--ink-deep); }
+  a.btn-primary:hover { transform: translateY(-2px); background: var(--gold-deeper); }
   a.btn-ghost {
-    border-color: var(--ink);
+    border-color: var(--gold-deep);
     color: var(--ink);
     background: transparent;
   }
-  a.btn-ghost:hover { transform: translateY(-2px); background: var(--ink); color: var(--bg-card); }
+  a.btn-ghost:hover { transform: translateY(-2px); background: var(--gold-deep); color: var(--bg-card); }
   a.btn-gold {
     background: var(--gold);
     color: var(--bg-card);
@@ -174,28 +176,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 32px;
+    padding: 16px 32px;
     max-width: var(--max-w);
     margin: 0 auto;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
     text-decoration: none;
     color: var(--ink);
   }
   .brand-mark {
-    height: 56px;
+    height: 84px;
     width: auto;
     flex-shrink: 0;
-  }
-  .brand-word {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: var(--ink);
   }
 
   nav.links {
@@ -536,8 +531,7 @@
   @media (max-width: 680px) {
     .wrap, .nav { padding-left: 20px; padding-right: 20px; }
     .section { padding: 64px 20px; }
-    .brand-mark { height: 44px; }
-    .brand-word { font-size: 1.2rem; }
+    .brand-mark { height: 60px; }
     nav.links { position: fixed; inset: 88px 0 0 0; background: var(--bg); flex-direction: column; padding: 34px 28px; gap: 22px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; border-top: 1px solid var(--line); }
     nav.links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
     nav.links a.btn { align-self: flex-start; }
@@ -554,7 +548,6 @@
   <div class="nav">
     <a class="brand" href="#top">
       <img src="logo.png" alt="Soma Swasthya" class="brand-mark">
-      <span class="brand-word">Soma Swasthya</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -659,7 +652,7 @@
       <p>Formulations selected to support your constitution — from daily herbal support to multi-week seasonal programs.</p>
     </div>
     <div class="shop-grid" id="shopGrid"><!-- populated by JS from PRODUCTS below --></div>
-    <p class="shop-note">Checkout is securely handled by Stripe (free to set up, accepts all major world currencies). Buttons above are placeholders until a Stripe Payment Link is added for each product in data.json — see EDITING-GUIDE.md.</p>
+    <p class="shop-note">Checkout is securely handled by PayPal (free to set up, accepts payments in 200+ countries and 23+ currencies). Buttons above are placeholders until a PayPal Payment Link is added for each product in data.json — see EDITING-GUIDE.md.</p>
   </section>
 
   <!-- ================= CONTACT ================= -->
@@ -746,10 +739,10 @@
       { category: "Conscious Living & Education", description: "Practices and guidance for sustainable, mindful living.", items: ["Transcendental Meditation (TM)", "Ayurvedic Student Tutoring", "Workshops"], icon: "box", link: "#booking" }
     ],
     products: [
-      { name: "Triphala Churna", description: "Classic three-fruit blend to support digestion and gentle detoxification.", price: "$24", stripeLink: "#contact" },
-      { name: "Ashwagandha Root Oil", description: "Warming massage oil traditionally used to calm the nervous system.", price: "$32", stripeLink: "#contact" },
-      { name: "Golden Milk Blend", description: "Turmeric, ginger, and warming spices for a nightly ritual cup.", price: "$19", stripeLink: "#contact" },
-      { name: "Tridosha Balancing Tea", description: "A gentle daily tea formulated to suit all three constitutions.", price: "$21", stripeLink: "#contact" }
+      { name: "Triphala Churna", description: "Classic three-fruit blend to support digestion and gentle detoxification.", price: "$24", paypalLink: "#contact" },
+      { name: "Ashwagandha Root Oil", description: "Warming massage oil traditionally used to calm the nervous system.", price: "$32", paypalLink: "#contact" },
+      { name: "Golden Milk Blend", description: "Turmeric, ginger, and warming spices for a nightly ritual cup.", price: "$19", paypalLink: "#contact" },
+      { name: "Tridosha Balancing Tea", description: "A gentle daily tea formulated to suit all three constitutions.", price: "$21", paypalLink: "#contact" }
     ]
   };
 
@@ -786,7 +779,7 @@
           <h3>${p.name}</h3>
           <p class="desc">${p.description}</p>
           <p class="product-price">${p.price}</p>
-          <a class="btn btn-primary" href="${p.stripeLink}">Buy Now</a>
+          <a class="btn btn-primary" href="${p.paypalLink}">Buy Now</a>
         </div>
       </div>
     `).join('');

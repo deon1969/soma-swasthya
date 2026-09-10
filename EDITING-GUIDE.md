@@ -26,7 +26,7 @@ Find the `"products"` section. Each product looks like this:
   "name": "Tridosha Balancing Tea",
   "description": "A gentle daily tea formulated to suit all three constitutions.",
   "price": "$21",
-  "stripeLink": "#contact"
+  "paypalLink": "#contact"
 }
 ```
 
@@ -38,24 +38,44 @@ To add a new one, click right after the `}` that closes the last product, type a
   "name": "Neem Detox Capsules",
   "description": "Gentle daily support for clear skin and healthy digestion.",
   "price": "$26",
-  "stripeLink": "#contact"
+  "paypalLink": "#contact"
 }
 ```
 
-## Example: adding a new service
+## Example: adding a new service category
 
-Same idea, under `"services"`:
+Find the `"services"` section. Each category looks like this:
+
+```json
+{
+  "category": "Conscious Living & Education",
+  "description": "Practices and guidance for sustainable, mindful living.",
+  "items": ["Transcendental Meditation (TM)", "Ayurvedic Student Tutoring", "Workshops"],
+  "icon": "box",
+  "link": "#booking"
+}
+```
+
+To add a new category, click right after the `}` that closes the last one, type a comma, then paste in a new block:
 
 ```json
 ,
 {
-  "name": "Panchakarma Prep Session",
-  "duration": "45 min",
-  "description": "A guided session to prepare your body and routine ahead of a panchakarma cleanse.",
-  "price": "$95",
+  "category": "New Category Name",
+  "description": "One sentence describing this category.",
+  "items": ["First offering", "Second offering", "Third offering"],
   "icon": "leaf",
   "link": "#booking"
 }
+```
+
+To add a new item to an *existing* category instead, just add another entry inside its `"items"` list, e.g. changing:
+```json
+"items": ["Ayurvedic Products", "Herbal Supplements"]
+```
+to:
+```json
+"items": ["Ayurvedic Products", "Herbal Supplements", "Detox Kits"]
 ```
 
 Available icons: `"leaf"`, `"root"`, `"compass"`, `"box"` — pick whichever fits, or reuse one from an existing entry.
@@ -82,7 +102,7 @@ becomes
 ## When you'd still need my help
 
 - Changing the site's design, colors, or layout (that lives in `index.html`, not `data.json`)
-- Connecting Calendly or Stripe for the first time
+- Connecting Calendly or PayPal for the first time
 - Anything involving actual code, not just content
 
 Day-to-day content — new offerings, price changes, descriptions — you can now do entirely yourself, whenever you like.
