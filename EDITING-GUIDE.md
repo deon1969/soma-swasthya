@@ -26,7 +26,7 @@ Find the `"products"` section. Each product looks like this:
   "name": "Tridosha Balancing Tea",
   "description": "A gentle daily tea formulated to suit all three constitutions.",
   "price": "$21",
-  "paypalLink": "#connect"
+  "paypalLink": "#contact"
 }
 ```
 
@@ -38,7 +38,7 @@ To add a new one, click right after the `}` that closes the last product, type a
   "name": "Neem Detox Capsules",
   "description": "Gentle daily support for clear skin and healthy digestion.",
   "price": "$26",
-  "paypalLink": "#connect"
+  "paypalLink": "#contact"
 }
 ```
 
@@ -102,7 +102,7 @@ becomes
 ## When you'd still need my help
 
 - Changing the site's design, colors, or layout (that lives in `index.html`, not `data.json`)
-- Connecting Calendly or PayPal for the first time
+- Connecting PayPal for the first time (Setmore booking is already connected)
 - Anything involving actual code, not just content
 
 Day-to-day content — new offerings, price changes, descriptions — you can now do entirely yourself, whenever you like.

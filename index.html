@@ -30,15 +30,17 @@
      file for a content change. See EDITING-GUIDE.md for how to do
      this straight from GitHub's website, no software required.
 
-  3. BOOKING & PAYMENTS (both currently placeholders)
-     - Booking: search for "CALENDLY EMBED GOES HERE". Sign up free
-       at calendly.com, create an event type, and paste your embed
-       code / link where marked.
-     - Payments: search for "paypalLink:" inside each product entry.
-       Create a free PayPal Business account (paypal.com), use
-       Pay & Get Paid > Create Payment Links and Buttons to make a
-       link for each product, and paste the URL in. PayPal Payment
-       Links work in 200+ countries and 23+ currencies, and only
+  3. BOOKING & PAYMENTS
+     - Booking: LIVE. Search for "SETMORE BOOKING PAGE" below — your
+       real Setmore calendar (https://deon9ug4.setmore.com) is embedded
+       and working. To switch to a different Setmore link later, just
+       replace the src="..." URL there.
+     - Payments (for Shop products): still a placeholder. Search for
+       "paypalLink:" inside each product entry. Create a free PayPal
+       Business account (paypal.com), use Pay & Get Paid > Create
+       Payment Links and Buttons to make a link for each product, and
+       paste the URL in. PayPal Payment Links work in 200+ countries
+       and 23+ currencies, and only
        charge a small fee per sale — no monthly cost.
 
   See the separate SETUP-GUIDE.md file for a full walkthrough,
@@ -417,18 +419,13 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     min-height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    text-align: center;
+    overflow: hidden;
   }
-  .booking-embed .placeholder-inner p {
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    max-width: 34ch;
-    margin: 16px auto 24px;
-    line-height: 1.6;
+  .booking-embed iframe {
+    display: block;
+    width: 100%;
+    height: 680px;
+    border: none;
   }
   .booking-embed svg { width: 40px; height: 40px; color: var(--gold-deep); margin: 0 auto; }
 
@@ -627,19 +624,17 @@
       </div>
       <div class="booking-embed">
         <!--
-          CALENDLY EMBED GOES HERE.
-          Free plan at calendly.com — after creating an event type,
-          replace this whole <div class="placeholder-inner"> block with
-          Calendly's provided embed <div> + <script> snippet, e.g.:
-
-          <div class="calendly-inline-widget" data-url="https://calendly.com/your-name/consultation" style="min-width:320px;height:600px;"></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+          SETMORE BOOKING PAGE — live embed.
+          This loads https://deon9ug4.setmore.com directly inside the site.
+          To change the link later (e.g. a new Setmore account), just
+          replace the src="..." URL below with the new one.
         -->
-        <div class="placeholder-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-          <p><strong style="color: var(--ink); display:block; margin-bottom:6px;">Calendar coming soon</strong>This is where your live booking calendar will appear once connected to Calendly (free) or Setmore (free).</p>
-          <a class="btn btn-gold" href="#contact">Contact to Book Manually</a>
-        </div>
+        <iframe
+          src="https://deon9ug4.setmore.com"
+          title="Book an appointment with Soma Swasthya"
+          scrolling="yes"
+          allow="web-share; payment">
+        </iframe>
       </div>
     </div>
   </section>
